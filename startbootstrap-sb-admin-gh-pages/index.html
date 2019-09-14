@@ -19,20 +19,25 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+    
+  <!-- Our own CSS (Adam) -->
+  <link href="css/general.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <div id="navbar">
+      <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">MIDAS</a>
+        <a class="navbar-brand mr-1" href="index.html">MIDAS</a>
 
-    <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-      <i class="fas fa-bars"></i>
-    </button>
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+          <i class="fas fa-bars"></i>
+        </button>
 
-  </nav>
+      </nav>
+    </div>
 
   <div id="wrapper">
 
@@ -67,6 +72,10 @@
       </div>
       <!-- /.container-fluid -->
 
+      <div id="priceGraph" class="text-center">
+        <canvas id="graph" width="600" height="400"></canvas>  
+      </div>
+        
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
         <div class="container my-auto">
@@ -87,6 +96,8 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+  <!--Price Graph-->
+  <script src="graph.js"></script>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
