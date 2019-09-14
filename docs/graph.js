@@ -10,11 +10,11 @@ var data;
         data = results;
       }
     });
-}*/
+}
 
 $(document).ready(function(){
 $("#csv-file").change(handleFileSelect);
-});
+});*/
 
 var dataLength = 800;
 data = new Array(dataLength);
