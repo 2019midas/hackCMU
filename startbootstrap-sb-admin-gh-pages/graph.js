@@ -13,7 +13,7 @@ for (var i=0; i<dataLength; i++) {
     data[i][2] = Math.random();
 }
 
-var margin = 20;
+var margin = 50;
 var mouseX, mouseY;
 
 var frame = 0;
@@ -56,12 +56,8 @@ function draw() {
     
     if(frame%30 == 0) updateData();
 
-    canvasContext.globalAlpha = 0.85;
-    canvasContext.lineWidth = 3;
-	drawLine(margin,margin,margin,canvas.height - margin, "black");
-    drawLine(margin,canvas.height - margin,canvas.width-margin,canvas.height-margin, "black");
-    canvasContext.globalAlpha = 1;
-    drawPlot();
+    drawAxes();
+    drawPlot(data[0][0], data[data.length-1][0]);
     
     frame++;
     if(frame%fps == 0) frame=0;
@@ -72,22 +68,57 @@ function updateData() {
     data.shift();
 }
 
-function drawPlot() {
+function drawAxes(smallestPrice,largestPrice,smallestTime,largestTime) {
+    canvasContext.globalAlpha = 0.85;
+    canvasContext.lineWidth = 3;
+    //y axis
+	drawLine(margin,margin,margin,canvas.height - margin, "black");
+    //top price
+    drawText(Number.parseFloat(largestPrice).toFixed(2),5,margin + 10);
+    //bottom price
+    drawText(Number.parseFloat(smallestPrice).toFixed(2),5,canvas.height-margin - 5);
+    //x axis
+    drawLine(margin,canvas.height - margin,canvas.width-margin,canvas.height-margin, "black");
+    //top time
+    drawText(largestTime,canvas.width-margin - 15,canvas.height - margin + 15);
+    //bottom time
+    drawText(smallestTime,margin,canvas.height - margin + 15);
+    canvasContext.globalAlpha = 1;
+    
+    drawText("Price ($)", 5,margin - 10, "black");
+    drawText("Time", canvas.width - margin + 25,canvas.height-margin + 15, "black");
+}
+
+function drawPlot(startTime, endTime) {
+    var startIndex = 0;
+    var endIndex = data.length - 1;
+    for (var i=1; i<data.length - 1; i++) {
+        if (data[i][0] <= startTime && data[i+1][0] > startTime) {
+            startIndex = i;             //init. index to the index where the time equals startTime
+        }
+    }
+    for (var i=1; i<data.length - 1; i++) {
+        if (data[i][0] <= endTime && data[i+1][0] > endTime) {
+            endIndex = i;             //init. index to the index where the time equals startTime
+        }
+    }
     var plotMargin = 10;
     var largestPrice = 0;
     var smallestPrice = 1000000000;
-    for(var i=0; i<data.length; i++) {
+    for(var i=startIndex; i<=endIndex; i++) {
         if(data[i][1] > largestPrice) largestPrice = data[i][1];
         if(data[i][1] < smallestPrice) smallestPrice = data[i][1];
     }
     
     var priceRange = (largestPrice + plotMargin) - (smallestPrice - plotMargin);
     
-    var smallestTime = data[0][0];
-    var largestTime = data[data.length-1][0];
+    var smallestTime = data[startIndex][0];
+    var largestTime = data[endIndex][0];
     var timeRange = largestTime - smallestTime;
     
-    for(var i=1; i<data.length; i++) {
+    drawAxes(smallestPrice-plotMargin, largestPrice+plotMargin, smallestTime, largestTime);
+    
+    for(var i=startIndex + 1; i<=endIndex; i++) {
         var currentTime = data[i][0];
         var currentPrice = data[i][1];
         var x1 = (canvas.width - 2*margin) * (currentTime - smallestTime)/timeRange + margin;
