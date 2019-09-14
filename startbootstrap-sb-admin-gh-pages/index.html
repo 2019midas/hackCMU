@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Dashboard</title>
+  <title>Midas</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,6 +33,7 @@
     </button>
 
   </nav>
+
 
   <div id="wrapper">
 
@@ -62,8 +63,36 @@
           </li>
           <li class="breadcrumb-item active">Overview</li>
         </ol>
-
-
+    
+          <!--button -->
+    <div class="card mb-3">
+        <div class="card-header">Profit Calculator</div>
+  <!--  <button class="btn btn-primary" type="button">button</button> -->
+<script src = "calculateprofit.js">
+    {
+       var tradeArray = new Array(200);
+//initialize prices to some vague model of real prices, starting at 200 & with no inflation
+//initialize decisionArray to random numbers between 0 and 1
+for (var i=0; i<time; i++) {
+    tradeArray[i] = new Array(3);
+    tradeArray[i][0] = i;               //the time = the index, but it doesn't have to.
+    if (i==0) {
+        tradeArray[i][1] = 200;
+    } else {
+        tradeArray[i][1] = tradeArray[i-1][1] + Math.random() * 2 - 1;
+    }
+    tradeArray[i][2] = Math.random();
+}
+    }
+        </script>
+<form oninput="x.value=1 -profitEarnedOverInterval(parseInt(a.value), parseInt(b.value), tradeArray)">
+    
+Start Time <input type="number" id="a" value="50"> <br>
+End Time <input type="number" id="b" value="50"> <br>
+Total Profit Percentage: <output name="x" for="a b"></output>
+</form>
+          </div>
+          
       </div>
       <!-- /.container-fluid -->
 
