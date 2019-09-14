@@ -82,11 +82,11 @@
 <script src = "calculateprofit.js">
 
         </script>
-<form oninput="x.value=1 -profitEarnedOverInterval(parseInt(a.value), parseInt(b.value), data)">
-    
-Start Time <input type="number" id="a" value="50"> <br>
-End Time <input type="number" id="b" value="50"> <br>
-Total Profit Percentage: <output name="x" for="a b"></output>
+<form oninput="x.value=parseInt(c.value) * profitEarnedOverInterval(parseInt(a.value), parseInt(b.value), data)">
+Inital Investment: <input type="number" id="c" value="500"> <br>    
+Start Time <input type="number" id="a" value="30"> <br>
+End Time <input type="number" id="b" value="60"> <br>
+Initial Investment + Profit: <output name="x" for="a b"></output>
 </form>
           </div>
           
