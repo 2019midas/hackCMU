@@ -68,7 +68,13 @@
           </li>
           <li class="breadcrumb-item active">Overview</li>
         </ol>
-    
+          
+            <div class="card mb-3">
+        <div class="card-header">Bitcoin Price</div>
+        <div id="priceGraph" class="text-center">
+        <canvas id="graph" width="600" height="400"></canvas>  
+      </div>
+     </div>
           <!--button -->
     <div class="card mb-3">
         <div class="card-header">Profit Calculator</div>
@@ -100,10 +106,6 @@ Total Profit Percentage: <output name="x" for="a b"></output>
           
       </div>
       <!-- /.container-fluid -->
-
-      <div id="priceGraph" class="text-center">
-        <canvas id="graph" width="600" height="400"></canvas>  
-      </div>
         
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
