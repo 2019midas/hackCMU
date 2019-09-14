@@ -52,6 +52,3 @@ function profitEarnedOverInterval(startTime, endTime, tArray) {
     
     return returns;
 }
-
-console.log("penis");
-console.log(profitEarnedOverInterval(0,150,tradeArray));
