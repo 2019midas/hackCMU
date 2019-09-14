@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Dashboard</title>
+  <title>Midas</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,6 +39,7 @@
       </nav>
     </div>
 
+
   <div id="wrapper">
 
     <!-- Sidebar -->
@@ -67,14 +68,30 @@
           </li>
           <li class="breadcrumb-item active">Overview</li>
         </ol>
-
-
-      </div>
-      <!-- /.container-fluid -->
-
-      <div id="priceGraph" class="text-center">
+          
+            <div class="card mb-3">
+        <div class="card-header">Bitcoin Price</div>
+        <div id="priceGraph" class="text-center">
         <canvas id="graph" width="600" height="400"></canvas>  
       </div>
+     </div>
+          <!--button -->
+    <div class="card mb-3">
+        <div class="card-header">Profit Calculator</div>
+  <!--  <button class="btn btn-primary" type="button">button</button> -->
+<script src = "calculateprofit.js">
+
+        </script>
+<form oninput="x.value=parseInt(c.value) * profitEarnedOverInterval(parseInt(a.value), parseInt(b.value), data)">
+Inital Investment: <input type="number" id="c" value="500"> <br>    
+Start Time <input type="number" id="a" value="30"> <br>
+End Time <input type="number" id="b" value="60"> <br>
+Initial Investment + Profit: <output name="x" for="a b"></output>
+</form>
+          </div>
+          
+      </div>
+      <!-- /.container-fluid -->
         
       <!-- Sticky Footer -->
       <footer class="sticky-footer">
