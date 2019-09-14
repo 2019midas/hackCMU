@@ -80,27 +80,13 @@
         <div class="card-header">Profit Calculator</div>
   <!--  <button class="btn btn-primary" type="button">button</button> -->
 <script src = "calculateprofit.js">
-    {
-       var tradeArray = new Array(200);
-//initialize prices to some vague model of real prices, starting at 200 & with no inflation
-//initialize decisionArray to random numbers between 0 and 1
-for (var i=0; i<time; i++) {
-    tradeArray[i] = new Array(3);
-    tradeArray[i][0] = i;               //the time = the index, but it doesn't have to.
-    if (i==0) {
-        tradeArray[i][1] = 200;
-    } else {
-        tradeArray[i][1] = tradeArray[i-1][1] + Math.random() * 2 - 1;
-    }
-    tradeArray[i][2] = Math.random();
-}
-    }
+
         </script>
-<form oninput="x.value=1 -profitEarnedOverInterval(parseInt(a.value), parseInt(b.value), tradeArray)">
-    
-Start Time <input type="number" id="a" value="50"> <br>
-End Time <input type="number" id="b" value="50"> <br>
-Total Profit Percentage: <output name="x" for="a b"></output>
+<form oninput="x.value=parseInt(c.value) * profitEarnedOverInterval(parseInt(a.value), parseInt(b.value), data)">
+Inital Investment: <input type="number" id="c" value="500"> <br>    
+Start Time <input type="number" id="a" value="30"> <br>
+End Time <input type="number" id="b" value="60"> <br>
+Initial Investment + Profit: <output name="x" for="a b"></output>
 </form>
           </div>
           
