@@ -1,10 +1,28 @@
-var dataLength = 300;
-var data = new Array(dataLength);
+var data;
+ 
+/*function handleFileSelect(evt) {
+    var file = evt.target.files[0];
+
+    Papa.parse(file, {
+      header: true,
+      dynamicTyping: true,
+      complete: function(results) {
+        data = results;
+      }
+    });
+}*/
+
+$(document).ready(function(){
+$("#csv-file").change(handleFileSelect);
+});
+
+var dataLength = 800;
+data = new Array(dataLength);
 //initialize prices to some vague model of real prices, starting at 200 & with no inflation
 //initialize decisions (data[i][2]) to random numbers between 0 and 1
 for (var i=0; i<dataLength; i++) {
     data[i] = new Array(3);
-    data[i][0] = i;               //the time = the index, but it doesn't have to.
+    data[i][0] = i*25;               //the time = the index, but it doesn't have to.
     if (i==0) {
         data[i][1] = 200;
     } else {
@@ -54,7 +72,7 @@ function draw() {
 	canvasContext.fillRect(0,0, canvas.width,canvas.height);
     canvasContext.globalAlpha = 1.0;*/
     
-    if(frame%30 == 0) updateData();
+    //if(frame%30 == 0) updateData();
 
     drawAxes();
     drawPlot(data[0][0], data[data.length-1][0]);
@@ -80,9 +98,9 @@ function drawAxes(smallestPrice,largestPrice,smallestTime,largestTime) {
     //x axis
     drawLine(margin,canvas.height - margin,canvas.width-margin,canvas.height-margin, "black");
     //top time
-    drawText(largestTime,canvas.width-margin - 15,canvas.height - margin + 15);
+    drawText(timeToString(largestTime),canvas.width-margin - 70,canvas.height - margin + 15);
     //bottom time
-    drawText(smallestTime,margin,canvas.height - margin + 15);
+    drawText(timeToString(smallestTime),margin - 5,canvas.height - margin + 15);
     canvasContext.globalAlpha = 1;
     
     drawText("Price ($)", 5,margin - 10, "black");
@@ -181,7 +199,7 @@ function drawInfo(time,price) {
     canvasContext.rect(x, y, width, height);
     canvasContext.fill();
     drawText("Price: $" + price.toFixed(2), x + 10, y + 20, "black");
-    drawText("Time: " + time, x + 10, y + 36, "black");
+    drawText(timeToString(time), x + 10, y + 36, "black");
 }
 
 function drawLine(startX,startY, endX,endY, color) {
@@ -205,4 +223,18 @@ function drawQuad(x1,y1, x2,y2, x3,y3, x4,y4) {
 function drawText(text, x,y, color) {
 	canvasContext.fillStyle = color;
 	canvasContext.fillText(text, x,y);
+}
+
+function timeToString(timestamp) {
+    date = unixToDate(timestamp);
+    var minutes = date.getMinutes().toString();
+    if(date.getMinutes() < 10) minutes = "0" + date.getMinutes().toString();
+    return date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear() + " "
+            + date.getHours() + ":" + minutes;
+}
+
+function unixToDate(timestamp) {
+    // Create a new JavaScript Date object based on the timestamp
+    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
+    return new Date(timestamp*1000);
 }
